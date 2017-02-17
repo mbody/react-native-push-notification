@@ -67,8 +67,10 @@ NotificationsComponent.prototype.addEventListener = function(type: string, handl
 		listener =  DeviceEventEmitter.addListener(
 			DEVICE_NOTIF_EVENT,
 			function(notifData) {
-				var data = JSON.parse(notifData.dataJSON);
-				handler(data);
+                if (notification && notifData.dataJSON) {
+					var data = JSON.parse(notifData.dataJSON);
+					handler(data);
+                }
 			}
 		);
 	} else if (type === 'register') {
@@ -82,8 +84,10 @@ NotificationsComponent.prototype.addEventListener = function(type: string, handl
 		listener = DeviceEventEmitter.addListener(
 			REMOTE_FETCH_EVENT,
 			function(notifData) {
-				var notificationData = JSON.parse(notifData.dataJSON)
-				handler(notificationData);
+                if (notification && notifData.dataJSON) {
+                    var notificationData = JSON.parse(notifData.dataJSON)
+                    handler(notificationData);
+                }
 			}
 		);
 	}
